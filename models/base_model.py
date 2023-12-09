@@ -21,7 +21,7 @@ class BaseModel:
             *args: Variable length argument list.
             **kwargs: Arbitrary keyword arguments.
         """
-        if kwargs:
+        if len(kwargs) != 0:
             for key, value in kwargs.items():
                 if key == "__class__":
                     continue
