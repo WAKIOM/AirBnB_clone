@@ -26,7 +26,7 @@ class BaseModel:
                 if key == "__class__":
                     continue
                 elif key == "created_at" or key == "updated_at":
-                    setattr(self, key, datetime.fromisoformat(value))
+                    setattr(self, key, datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f'))
                 else:
                     setattr(self, key, value)
         else:
@@ -60,8 +60,8 @@ class BaseModel:
         Returns:
             dict: A dictionary representation of the BaseModel instance.
         """
-        new_dict = self.__dict__.copy()
-        new_dict["created_at"] = self.created_at.isoformat()
-        new_dict["updated_at"] = self.updated_at.isoformat()
-        new_dict["__class__"] = self.__class__.__name__
-        return new_dict
+        obj_dict = self.__dict__.copy()
+        obj_dict["created_at"] = self.created_at.isoformat()
+        obj_dict["updated_at"] = self.updated_at.isoformat()
+        obj_dict["__class__"] = self.__class__.__name__
+        return obj_dict
