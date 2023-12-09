@@ -1,20 +1,24 @@
 #!/usr/bin/python3
 """module defines and creates a console"""
 import cmd
-import sys
 
 
 class HBNBCommand(cmd.Cmd):
 
     prompt = "(hbnb) "
 
+    def emptyline(self):
+        """emptyline"""
+        pass
+
     def do_quit(self, arg):
         """Quit command to exit the program"""
-        sys.exit(0)
+        return True
 
     def do_EOF(self, arg):
         """Exit the program"""
-        sys.exit(0)
+        print()
+        return True
 
     def do_create(self, arg):
         """
