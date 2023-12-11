@@ -69,11 +69,11 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** no instance found **")
 
-    def do_destroy():
+    def do_destroy(self, arg):
         """
-         Deletes an instance based on the class name and id
-         (save the change into the JSON file)
-         Usage: $ destroy BaseModel 1234-1234-1234
+        Deletes an instance based on the class name and id
+        (save the change into the JSON file)
+        Usage: $ destroy BaseModel 1234-1234-1234
         """
         args = arg.split()
         if not args:
