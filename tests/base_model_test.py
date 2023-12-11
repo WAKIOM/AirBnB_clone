@@ -1,5 +1,6 @@
 import unittest
 from models.base_model import BaseModel
+import os
 
 
 class TestBaseModel(unittest.TestCase):
@@ -14,15 +15,27 @@ class TestBaseModel(unittest.TestCase):
         self.base_model = BaseModel()
 
     def tearDown(self) -> None:
-        return super().tearDown()
+        """
+        Tear down method for the test class
+        """
+        self.resetStorage()
 
-    def str(self):
+    def resetStorage(self):
+        """
+        Reset the storage
+        """
+        from models.engine.file_storage import FileStorage
+        FileStorage._FileStorage__objects = {}
+        if os.path.isfile(FileStorage.__file_path):
+            os.remove(FileStorage.__file_path)
+
+    def test_str(self):
         """
         Test the __str__ method
         """
         self.assertIsInstance(str(self.base_model), str)
 
-    def save(self):
+    def test_save(self):
         """
         Test the save method
         """
@@ -30,7 +43,7 @@ class TestBaseModel(unittest.TestCase):
         self.base_model.save()
         self.assertGreater(self.base_model.updated_at, initial_updated_at)
 
-    def to_dict(self):
+    def test_to_dict(self):
         """
         Test the to_dict method
         """
